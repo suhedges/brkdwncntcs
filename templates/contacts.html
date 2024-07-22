@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f5f5f5;
+            background-color: #ffffff; /* Changed background color to white */
         }
 
         .container {
@@ -30,9 +30,9 @@
 
         .contact {
             border: 1px solid #ccc;
- 	    font-weight: bold;
-            padding: 10px;
-            margin: 10px 0;
+            font-weight: bold;
+            padding: 2px; /* Reduced padding */
+            margin: 2px 0; /* Reduced margin */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -41,10 +41,11 @@
         .contact div {
             display: flex;
             align-items: center;
+            margin-top: 1px; /* Reduced margin between contact numbers */
         }
 
         .contact img {
-            margin-left: 10px;
+            margin-left: 5px; /* Reduced margin between number and icon */
             width: 35px;
             height: auto;
         }
@@ -65,6 +66,12 @@
             color: #6E98AD;  /* Change 'blue' to your desired color */
             font-size: 18px;  /* Change '18px' to your desired font size */
         }
+
+        .caps-lock-warning {
+            display: none;
+            color: red;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -72,8 +79,8 @@
         <h1>Contact Information</h1>
         <select id="location-select" onchange="displayContacts()">
             <option value="">--Select a Location--</option>
-            <option value="Henderson">Henderson</option>
             <option value="Evansville">Evansville</option>
+            <option value="Henderson">Henderson</option>
             <option value="Jasper">Jasper</option>
 
         </select>
@@ -81,22 +88,22 @@
     </div>
     <script>
 const contacts = {
-    "Henderson": [
-        {"name": "Tom Elsner", "numbers": [{'number': '(270) 957-0126', 'type': 'cell'}, {'number': '(270) 957-0126', 'type': 'home'}]},
-        {"name": "Mark Hurm", "numbers": [{'number': '(123) 456-7899', 'type': 'home'}]},
-        {"name": "Jared Hurm", "numbers": [{'number': '(123) 456-7890', 'type': 'home'}]},
-        {"name": "Seth Hedges", "numbers": [{'number': '(812) 228-0829', 'type': 'cell'}]},
-    ],
     "Evansville": [
-        {"name": "Mike Elsner", "numbers": [{'number': '(123) 456-7890', 'type': 'cell'}]},
-        {"name": "Chad Willis", "numbers": [{'number': '(123) 456-7890', 'type': 'home'}, {'number': '(123) 456-7890', 'type': 'cell'}]},
-        {"name": "Errick Lickey", "numbers": [{'number': '(123) 456-7890', 'type': 'home'}]},
-        {"name": "Shawniqua Elsner", "numbers": [{'number': '(123) 456-7890', 'type': 'cell'}]},
+        {"name": "Mike Elsner", "numbers": [{'number': '(555) 555-5555', 'type': 'cell'}]},
+        {"name": "Chad Willis", "numbers": [{'number': '(555) 555-5555', 'type': 'home'}, {'number': '(555) 555-5555', 'type': 'cell'}]},
+        {"name": "Errick Lickey", "numbers": [{'number': '(555) 555-5555', 'type': 'home'}]},
+        {"name": "Shawniqua Elsner", "numbers": [{'number': '(555) 555-5555', 'type': 'cell'}]},
+    ],
+    "Henderson": [
+        {"name": "Tom Elsner", "numbers": [{'number': '(555) 555-5555', 'type': 'cell'}, {'number': '(555) 555-5555', 'type': 'home'}]},
+        {"name": "Mark Hurm", "numbers": [{'number': '(555) 555-5555', 'type': 'home'}]},
+        {"name": "Jared Hurm", "numbers": [{'number': '(555) 555-5555', 'type': 'home'}]},
+        {"name": "Seth Hedges", "numbers": [{'number': '(555) 555-5555', 'type': 'cell'}]},
     ],
     "Jasper": [
-        {"name": "Brad Dedrick", "numbers": [{'number': '(123) 456-7890', 'type': 'home'}]},
-        {"name": "John Wilz", "numbers": [{'number': '(123) 456-7890', 'type': 'cell'}]},
-        {"name": "Russ Mehringer", "numbers": [{'number': '(123) 456-7890', 'type': 'home'}]},
+        {"name": "Brad Dedrick", "numbers": [{'number': '(555) 555-5555', 'type': 'home'}]},
+        {"name": "John Wilz", "numbers": [{'number': '(555) 555-5555', 'type': 'cell'}]},
+        {"name": "Russ Mehringer", "numbers": [{'number': '(555) 555-5555', 'type': 'home'}]},
     ],
 
 };
@@ -136,6 +143,28 @@ function displayContacts() {
         });
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const passwordInput = document.querySelector('input[type="password"]');
+    const capsLockWarning = document.createElement('div');
+    capsLockWarning.classList.add('caps-lock-warning');
+    capsLockWarning.textContent = 'Caps Lock is ON';
+    passwordInput.parentNode.insertBefore(capsLockWarning, passwordInput.nextSibling);
+
+    passwordInput.addEventListener('keydown', function(event) {
+        if (event.getModifierState('CapsLock')) {
+            capsLockWarning.style.display = 'block';
+        } else {
+            capsLockWarning.style.display = 'none';
+        }
+    });
+
+    passwordInput.addEventListener('keyup', function(event) {
+        if (!event.getModifierState('CapsLock')) {
+            capsLockWarning.style.display = 'none';
+        }
+    });
+});
     </script>
 </body>
 </html>
