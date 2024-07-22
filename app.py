@@ -50,7 +50,7 @@ def login():
         password = request.form.get('password')
         if password == PASSWORD:
             session['authenticated'] = True
-            return redirect(url_for('contacts'))
+            return redirect(url_for('notice'))
         else:
             log_failed_attempt(ip)
             if is_ip_locked(ip):
@@ -59,6 +59,12 @@ def login():
                 return render_template('login.html', message="Incorrect password. Please try again.", disabled=False)
 
     return render_template('login.html', message="", disabled=False)
+
+@app.route('/notice')
+def notice():
+    if not session.get('authenticated'):
+        return redirect(url_for('login'))
+    return render_template('notice.html')
 
 @app.route('/contacts')
 def contacts():
