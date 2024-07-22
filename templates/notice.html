@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Notice</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+        .notice-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     	    width: 400px;
+            text-align: center;
+        }
+        .notice-container p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .notice-container a {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="notice-container">
+        <h1>Important Notice</h1>
+        <p>Before proceeding to the contacts section, please note the following:</p>
+        <p>If you are contacting us during business hours, we highly recommend calling your local Tri-State Bearing branch first to ensure they have access to a computer to assist you promptly. You can find the branch numbers <a href="https://www.tristate-bearing.com/locations" target="_blank">here</a>.</p>
+        <p>For after-hours calls, please be aware that contacts marked as a home number may not have immediate access to the system.</p>
+        <p>Thank you for your understanding and cooperation.</p>
+        <button onclick="proceed()">OK</button>
+    </div>
+    <script>
+        function proceed() {
+            window.location.href = "{{ url_for('contacts') }}";
+        }
+    </script>
+</body>
+</html>
