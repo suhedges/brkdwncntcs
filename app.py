@@ -7,6 +7,11 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secure random key for session encryption
 
+app.config.update(
+    SESSION_COOKIE_SAMESITE='None',
+    SESSION_COOKIE_SECURE=True
+)
+
 PASSWORD = "1234"
 MAX_ATTEMPTS = 3
 LOCKOUT_TIME = timedelta(minutes=10)
