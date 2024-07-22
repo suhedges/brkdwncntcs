@@ -26,15 +26,48 @@
             border-radius: 8px;
             border: 1px solid #ccc;
         }
+        .caps-lock-warning {
+            display: none;
+            color: red;
+            font-size: 12px;
+        }
+        .message {
+            color: red;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h1>Login</h1>
+        {% if message %}
+        <div class="message">{{ message }}</div>
+        {% endif %}
         <form method="post">
-            <input type="password" name="password" placeholder="Enter Password" required>
-            <input type="submit" value="Login">
+            <input type="password" name="password" placeholder="Enter Password" required {% if disabled %}disabled{% endif %}>
+            <div class="caps-lock-warning">Caps Lock is ON</div>
+            <input type="submit" value="Login" {% if disabled %}disabled{% endif %}>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const passwordInput = document.querySelector('input[type="password"]');
+            const capsLockWarning = document.querySelector('.caps-lock-warning');
+
+            passwordInput.addEventListener('keydown', function(event) {
+                if (event.getModifierState('CapsLock')) {
+                    capsLockWarning.style.display = 'block';
+                } else {
+                    capsLockWarning.style.display = 'none';
+                }
+            });
+
+            passwordInput.addEventListener('keyup', function(event) {
+                if (!event.getModifierState('CapsLock')) {
+                    capsLockWarning.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
