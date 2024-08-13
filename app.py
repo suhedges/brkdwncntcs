@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for, session
 from datetime import datetime, timedelta
 from collections import defaultdict
@@ -7,6 +6,8 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secure random key for session encryption
 
+# Update the session configuration to ensure it is temporary
+app.config['SESSION_PERMANENT'] = False
 app.config.update(
     SESSION_COOKIE_SAMESITE='None',
     SESSION_COOKIE_SECURE=True
